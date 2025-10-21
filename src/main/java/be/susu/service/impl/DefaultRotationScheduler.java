@@ -10,14 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import be.susu.db.entity.Cycle;
 import be.susu.db.entity.CycleStatus;
+import be.susu.db.entity.Membership;
 import be.susu.db.repository.CycleRepository;
+import be.susu.db.repository.MembershipRepository;
 import be.susu.util.Frequency;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Scheduler that runs daily to monitor Susu cycles.
- * Cancels OPEN cycles that exceed their group's frequency duration.
+ * Cancels expired cycles and schedules the next one automatically.
  */
 @Slf4j
 @Component
@@ -25,43 +27,137 @@ import lombok.extern.slf4j.Slf4j;
 public class DefaultRotationScheduler {
 
     private final CycleRepository cycleRepository;
+    private final MembershipRepository membershipRepository;
 
     /**
      * Runs every day at 3 AM.
-     * Cancels OPEN cycles that have exceeded their allowed frequency duration.
+     * Cancels expired OPEN cycles and creates the next one.
      */
     @Transactional
     @Scheduled(cron = "0 0 3 * * *")
-    public void scanAndCancelStaleCycles() {
-        List<Cycle> openCycles = cycleRepository.findAll()
-                .stream()
-                .filter(c -> c.getStatus() == CycleStatus.OPEN)
-                .toList();
+    public void monitorAndRotateCycles() {
+        List<Cycle> openCycles = findOpenCycles();
 
         for (Cycle cycle : openCycles) {
-            if (cycle.getGroup() == null || cycle.getGroup().getFrequency() == null) {
-                log.warn("Skipping cycle {} — group or frequency missing", cycle.getId());
-                continue;
-            }
+            if (!isCycleValid(cycle)) continue;
 
-            Frequency frequency = cycle.getGroup().getFrequency();
-            Duration allowedDuration = getAllowedDuration(frequency);
-            Instant expiryTime = cycle.getCreatedAt().plus(allowedDuration);
-
-            if (Instant.now().isAfter(expiryTime)) {
-                cycle.setStatus(CycleStatus.CANCELLED);
-                cycleRepository.save(cycle);
-                log.warn("⏰ Cancelled stale cycle: groupId={}, cycleNo={}, frequency={}",
-                        cycle.getGroup().getId(), cycle.getCycleNo(), frequency);
+            if (isCycleExpired(cycle)) {
+                handleExpiredCycle(cycle);
             } else {
-                log.info("Cycle still active: groupId={}, cycleNo={}, frequency={}, expiresAt={}",
-                        cycle.getGroup().getId(), cycle.getCycleNo(), frequency, expiryTime);
+                logCycleStatus(cycle);
             }
         }
     }
 
+    // ----------------- Helper Functions -----------------
+
     /**
-     * Returns duration based on the group's contribution frequency.
+     * Find all open cycles from repository.
+     */
+    private List<Cycle> findOpenCycles() {
+        return cycleRepository.findAll()
+                .stream()
+                .filter(c -> c.getStatus() == CycleStatus.OPEN)
+                .toList();
+    }
+
+    /**
+     * Validate cycle data before processing.
+     */
+    private boolean isCycleValid(Cycle cycle) {
+        if (cycle.getGroup() == null) {
+            log.warn("Skipping cycle {} — missing group reference", cycle.getId());
+            return false;
+        }
+
+        if (cycle.getGroup().getFrequency() == null) {
+            log.warn("Skipping cycle {} — group {} missing frequency",
+                    cycle.getId(), cycle.getGroup().getId());
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Determine if the cycle has expired based on frequency.
+     */
+    private boolean isCycleExpired(Cycle cycle) {
+        Duration allowedDuration = getAllowedDuration(cycle.getGroup().getFrequency());
+        Instant expiryTime = cycle.getCreatedAt().plus(allowedDuration);
+        return Instant.now().isAfter(expiryTime);
+    }
+
+    /**
+     * Handle cycle expiration: cancel and create next.
+     */
+    private void handleExpiredCycle(Cycle cycle) {
+        cancelCycle(cycle);
+        createNextCycle(cycle);
+    }
+
+    /**
+     * Cancel an expired cycle and persist update.
+     */
+    private void cancelCycle(Cycle cycle) {
+        cycle.setStatus(CycleStatus.CANCELLED);
+        cycle.setCompletedAt(Instant.now());
+        cycleRepository.save(cycle);
+
+        log.warn("⏰ Cycle cancelled: groupId={}, cycleNo={}, frequency={}",
+                cycle.getGroup().getId(),
+                cycle.getCycleNo(),
+                cycle.getGroup().getFrequency());
+    }
+
+    /**
+     * Create the next rotation cycle for the group.
+     */
+    private void createNextCycle(Cycle previousCycle) {
+        var group = previousCycle.getGroup();
+        List<Membership> members = membershipRepository.findByGroupIdOrderByJoinOrderAsc(group.getId());
+
+        if (members.isEmpty()) {
+            log.error("❌ Cannot create next cycle — no members in group {}", group.getId());
+            return;
+        }
+
+        Membership nextRecipient = getNextRecipient(previousCycle, members);
+
+        Cycle nextCycle = Cycle.builder()
+                .group(group)
+                .cycleNo(previousCycle.getCycleNo() + 1)
+                .recipient(nextRecipient)
+                .status(CycleStatus.OPEN)
+                .createdAt(Instant.now())
+                .scheduledAt(Instant.now())
+                .build();
+
+        cycleRepository.save(nextCycle);
+        log.info("🔁 Next cycle created: groupId={}, cycleNo={}, recipient={}",
+                group.getId(), nextCycle.getCycleNo(), nextRecipient.getKeycloakUserId());
+    }
+
+    /**
+     * Rotate and determine who the next recipient will be.
+     */
+    private Membership getNextRecipient(Cycle previousCycle, List<Membership> members) {
+        int currentIndex = members.indexOf(previousCycle.getRecipient());
+        int nextIndex = (currentIndex + 1) % members.size();
+        return members.get(nextIndex);
+    }
+
+    /**
+     * Log active cycles that are still valid.
+     */
+    private void logCycleStatus(Cycle cycle) {
+        Duration allowedDuration = getAllowedDuration(cycle.getGroup().getFrequency());
+        Instant expiryTime = cycle.getCreatedAt().plus(allowedDuration);
+        log.info("✅ Cycle still active: groupId={}, cycleNo={}, expiresAt={}",
+                cycle.getGroup().getId(), cycle.getCycleNo(), expiryTime);
+    }
+
+    /**
+     * Map frequency to its duration.
      */
     private Duration getAllowedDuration(Frequency frequency) {
         return switch (frequency) {

@@ -16,6 +16,8 @@ import be.susu.db.entity.SusuGroup;
 public interface MembershipRepository extends JpaRepository<Membership, UUID> {
 
     List<Membership> findByGroupOrderByJoinOrder(SusuGroup group);
+    List<Membership> findByGroupIdOrderByJoinOrderAsc(UUID groupId);
+
 
     Optional<Membership> findByGroupAndKeycloakUserId(SusuGroup group, String keycloakUserId);
 
