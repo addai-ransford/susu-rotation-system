@@ -100,7 +100,7 @@ public class DefaultRotationService implements RotationService {
                             .amount(total)
                             .build())
                     );
-            paymentService.processPayout(payout, cycle.getRecipient());
+            paymentService.processPayout(payout);
 
             cycle.setStatus(CycleStatus.COMPLETED);
             cycle.setCompletedAt(Instant.now());

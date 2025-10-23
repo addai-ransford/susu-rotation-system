@@ -26,7 +26,11 @@ public class FakeStripePaymentService implements PaymentService {
     }
 
     @Override
-    public void processPayout(UUID groupId, UUID recipientMembershipId, BigDecimal amount) {
-        log.info("Fake payout: group={} recipient={} amount={}", groupId, recipientMembershipId, amount);
+    public void processPayout(Payout payout) {
+        log.info("Fake payout: group={} recipient={} amount={}",
+                payout.getGroup().getId(),
+                payout.getMembership().getId(),
+                payout.getAmount());
+
     }
 }
