@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import be.susu.db.entity.Membership;
@@ -15,30 +16,17 @@ import be.susu.service.PaymentService;
  * Stripe Connect accounts.
  */
 @Service
-
+@Slf4j
 public class FakeStripePaymentService implements PaymentService {
 
-    // Simulate user payment via Stripe checkout session
     @Override
-    public String processUserPayment(UUID groupId, String keycloakUserId, BigDecimal amount) {
-        System.out.printf("💳 [StripeMock] User %s paid %.2f to group %s%n",
-                keycloakUserId, amount, groupId);
-        // Return a fake Stripe payment ID
-        return "pi_" + UUID.randomUUID();
+    public void processUserPayment(UUID groupId, String keycloakUserId, BigDecimal amount) {
+        // simulate charge success
+        log.info("Fake charge: user={} group={} amount={}", keycloakUserId, groupId, amount);
     }
 
-    // Simulate payout to recipient member
     @Override
-    public String processPayout(Payout payout, Membership recipient) {
-        System.out.printf("🏦 [StripeMock] Payout %.2f to recipient %s (Stripe Account: %s)%n",
-                payout.getAmount(),
-                recipient.getKeycloakUserId(),
-                recipient.getStripeAccountId() != null ? recipient.getStripeAccountId() : "N/A");
-
-        payout.setPaid(true);
-        payout.setPaidAt(Instant.now());
-
-        // Return fake payout ID
-        return "po_" + UUID.randomUUID();
+    public void processPayout(UUID groupId, UUID recipientMembershipId, BigDecimal amount) {
+        log.info("Fake payout: group={} recipient={} amount={}", groupId, recipientMembershipId, amount);
     }
 }

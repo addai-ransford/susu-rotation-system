@@ -114,7 +114,7 @@ public class DefaultRotationScheduler {
      */
     private void createNextCycle(Cycle previousCycle) {
         var group = previousCycle.getGroup();
-        List<Membership> members = membershipRepository.findByGroupIdOrderByJoinOrderAsc(group.getId());
+        List<Membership> members = membershipRepository.findByGroupIdOrderByJoinOrder(group.getId());
 
         if (members.isEmpty()) {
             log.error("❌ Cannot create next cycle — no members in group {}", group.getId());

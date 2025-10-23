@@ -34,16 +34,14 @@ public class DefaultRotationService implements RotationService {
     @Transactional
     @Override
     public Cycle ensureOpenCycle(SusuGroup group) {
-        Cycle latest = cycleRepo
-                .findTopByGroupOrderByCycleNoDesc(group)
+        Cycle latest = cycleRepo.findTopByGroupIdOrderByCycleNoDesc(group.getId())
                 .orElse(null);
         if (latest != null && latest.getStatus() == CycleStatus.OPEN) {
             return latest;
         }
 
         int nextCycleNo = (latest == null) ? 1 : latest.getCycleNo() + 1;
-        List<Membership> members = membershipRepo
-                .findByGroupOrderByJoinOrder(group)
+        List<Membership> members = membershipRepo.findByGroupIdOrderByJoinOrder(group.getId())
                 .stream()
                 .filter(Membership::isActive)
                 .toList();
@@ -69,7 +67,7 @@ public class DefaultRotationService implements RotationService {
     @Override
     public Contribution contributeToCycle(SusuGroup group, String keycloakUserId, BigDecimal amount) {
         Cycle cycle = ensureOpenCycle(group);
-        Membership member = membershipRepo.findByGroupAndKeycloakUserId(group, keycloakUserId)
+        Membership member = membershipRepo.findByGroupIdAndKeycloakUserId(group.getId(), keycloakUserId)
                 .orElseThrow(() -> new IllegalArgumentException("Membership not found or inactive."));
 
         if (!member.isActive()) {
@@ -90,10 +88,10 @@ public class DefaultRotationService implements RotationService {
                 .build();
         contributionRepo.save(contribution);
 
-        long count = contributionRepo.countByGroupAndCycleNo(group, cycle.getCycleNo());
+        long count = contributionRepo.countByGroupIdAndCycleNo(group.getId(), cycle.getCycleNo());
         if (count >= group.getMaxMembers()) {
             BigDecimal total = group.getContributionAmount().multiply(BigDecimal.valueOf(group.getMaxMembers()));
-            Payout payout = payoutRepo.findByGroupAndCycleNoAndPaidFalse(group, cycle.getCycleNo())
+            Payout payout = payoutRepo.findByGroupIdAndCycleNoAndPaidFalse(group.getId(), cycle.getCycleNo())
                     .orElseGet(() -> payoutRepo.save(
                     Payout.builder()
                             .group(group)
