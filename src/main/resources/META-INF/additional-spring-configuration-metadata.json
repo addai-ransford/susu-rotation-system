@@ -1,5 +1,47 @@
-{"properties": [{
-  "name": "management.endpoints.web.exposure.include",
-  "type": "java.lang.String",
-  "description": "A description for 'management.endpoints.web.exposure.include'"
-}]}
+{"properties": [
+  {
+    "name": "management.endpoints.web.exposure.include",
+    "type": "java.lang.String",
+    "description": "A description for 'management.endpoints.web.exposure.include'"
+  },
+  {
+    "name": "spring.keycloak.auth-server-url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.keycloak.auth-server-url'"
+  },
+  {
+    "name": "spring.keycloak.realm",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.keycloak.realm'"
+  },
+  {
+    "name": "spring.keycloak.resource",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.keycloak.resource'"
+  },
+  {
+    "name": "keycloak.auth-server-url",
+    "type": "java.lang.String",
+    "description": "A description for 'keycloak.auth-server-url'"
+  },
+  {
+    "name": "keycloak.resource",
+    "type": "java.lang.String",
+    "description": "A description for 'keycloak.resource'"
+  },
+  {
+    "name": "keycloak.public-client",
+    "type": "java.lang.String",
+    "description": "A description for 'keycloak.public-client'"
+  },
+  {
+    "name": "keycloak.bearer-only",
+    "type": "java.lang.String",
+    "description": "A description for 'keycloak.bearer-only'"
+  },
+  {
+    "name": "keycloak.realm",
+    "type": "java.lang.String",
+    "description": "A description for 'keycloak.realm'"
+  }
+]}
