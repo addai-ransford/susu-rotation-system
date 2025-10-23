@@ -10,18 +10,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import be.susu.db.entity.Cycle;
-import be.susu.db.entity.SusuGroup;
 import jakarta.persistence.LockModeType;
 
 @Repository
 public interface CycleRepository extends JpaRepository<Cycle, UUID> {
 
-    Optional<Cycle> findTopByGroupOrderByCycleNoDesc(SusuGroup group);
+    Optional<Cycle> findTopByGroupIdOrderByCycleNoDesc(UUID groupId);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT c FROM Cycle c WHERE c.group = :group AND c.cycleNo = :cycleNo")
-    Optional<Cycle> findByGroupAndCycleNoForUpdate(@Param("group") SusuGroup group,
-                                                   @Param("cycleNo") Integer cycleNo);
+    @Query("select c from Cycle c where c.group.id = :groupId and c.cycleNo = :cycleNo")
+    Optional<Cycle> findByGroupIdAndCycleNoForUpdate(@Param("groupId") UUID groupId, @Param("cycleNo") Integer cycleNo);
 
-    Optional<Cycle> findByGroupAndCycleNo(SusuGroup group, Integer cycleNo);
+    Optional<Cycle> findByGroupIdAndCycleNo(UUID groupId, Integer cycleNo);
 }
