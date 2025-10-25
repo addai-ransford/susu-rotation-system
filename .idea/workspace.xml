@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="59f1a392-e062-4e32-ae2d-b4d04f18fd49" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/config/META-INF/additional-spring-configuration-metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/config/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/config/db/migration/V1__init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/SusuApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/auth/KeycloakRealmRoleConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/auth/SecurityModuleConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/config/OpenApiConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/entity/Contribution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/entity/Cycle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/entity/CycleStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/entity/Membership.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/entity/Payout.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/entity/SusuGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/repository/ContributionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/repository/CycleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/repository/MembershipRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/repository/PayoutRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/db/repository/SusuGroupRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/service/PaymentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/service/RotationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/service/SusuService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/service/impl/DefaultRotationScheduler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/service/impl/DefaultRotationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/service/impl/DefaultSusuService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/service/impl/FakeStripePaymentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/web/controller/GroupController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/web/controller/SusuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/web/dto/ContributionRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/susu/web/dto/CreateGroupDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/additional-spring-configuration-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/be/susu/SusuApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="susu" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nojarit&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:addai-ransford/susu-rotation-system.git&quot;,
+    &quot;accountId&quot;: &quot;b716fa6b-9103-4129-ab20-b0e9ae1c6b40&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="34Q1QMkBKhWSY7CdMjvmgqiS7Ws" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build susu.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.SusuApplication.executor": "Run",
+    "com.google.cloudcode.ide_session_index": "20251025_0003",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/nanaoseijnr/Be/PP_2025/susu",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="ee2c47e1-657f-46db-b938-bb3a0ca5f702" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SusuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="susu" />
+      <option name="SPRING_BOOT_MAIN_CLASS" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="true" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+          <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH=".env" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="59f1a392-e062-4e32-ae2d-b4d04f18fd49" name="Changes" comment="" />
+      <created>1761130964389</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761130964389</updated>
+      <workItem from="1761130965595" duration="382000" />
+      <workItem from="1761132990234" duration="14056000" />
+      <workItem from="1761379432006" duration="470000" />
+      <workItem from="1761379928343" duration="76000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
